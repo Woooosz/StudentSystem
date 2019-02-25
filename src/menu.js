@@ -37,6 +37,16 @@ const sidebarMenu = [
         name: '用户信息',
         icon: 'bulb',
       },
+      {
+        key:'tutor',
+        name:'导师信息',
+        icon:'bulb',
+      },
+      {
+        key:'workroom',
+        name:'工位信息',
+        icon:'bulb',
+      },
     ],
   },
   {

@@ -189,4 +189,15 @@ module.exports = [
     dataType:'varchar',
 
   },
+  {
+    key:'singleRecordActions',
+    title:'操作',
+    width:200,
+    actions:[
+      {
+        name:'删除',
+        type:'delete',
+      },
+    ],
+  },
 ];

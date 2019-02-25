@@ -4,9 +4,9 @@
 
 module.exports = [
   {
-    key: 'id',  // 传递给后端的字段名
-    title: 'ID',  // 前端显示的名称
-    dataType: 'int',
+    key: 'xuwhao',
+    title: '学号',
+    dataType: 'varchar',
   },
   {
     key: 'shoujihaoma',
@@ -23,10 +23,13 @@ module.exports = [
     title: '工作室',
     dataType: 'varchar',
   },
+
   {
-    key: 'xuwhao',
-    title: '学号',
-    dataType: 'varchar',
+    key:'xueweileixing',
+    title:'学位类型',
+    dataType:'varchar',
+    showType:'radio',
+    options:[{key:'shuoshi', value:'硕士'},{key:'boshi', value:'博士'}]
   },
   {
     key: 'isNative',
