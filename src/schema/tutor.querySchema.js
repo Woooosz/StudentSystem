@@ -4,22 +4,9 @@
 
 module.exports = [
   {
-    key: 'id',  // 传递给后端的字段名
-    title: 'ID',  // 前端显示的名称
-    dataType: 'int',
-  },
-  {
-    key: 'haha',
-    title: '测试',
-    dataType: 'varchar',
-  },
-  {
-    key: 'type',
-    title: '类型',
-    dataType: 'int',
-    showType: 'select',
-    options: [{key: '1', value: '类型1'}, {key: '2', value: '类型2'}],
-    defaultValue: '1',
+    'key':'tutor_id',
+    'title':'编号',
+    dataType:'varchar'
   },
   {
     key:'tutor_name',
@@ -28,7 +15,7 @@ module.exports = [
   },
   {
     key:'tutor_phone',
-    title:'导师联系方式',
+    title:'联系方式',
     dataType:'varchar'
   }
 ];

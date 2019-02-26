@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     key:'name',
-    title:'教研室名称',
+    title:'名称',
     dataType:'varchar',
   },
   {

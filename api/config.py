@@ -1,5 +1,10 @@
-FACE_PATH = './conf/haarcascade_smile.xml'
-SMILE_PATH = './conf/lbpcascade_frontalface.xml'
 UPLOAD_FOLDER = 'uploads'
 DEBUG = True
 JSON_AS_ASCII = False
+# SALT八位
+SALT = 'AAAAAAAA'
+MYSQL_HOST = '188.131.197.43'
+MYSQL_PORT = 3307
+MYSQL_USRT = 'root'
+MYSQL_PASSWD = 'Wsz960402'
+MYSQL_DB = 'student_db'

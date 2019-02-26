@@ -13,7 +13,7 @@ module.exports = {
   favicon: 'http://jxy.me/favicon.ico',  // 设置网页的favicon, 可以是外链, 也可以是本地
   footer: '<a target="_blank" href="http://goesbest.cn">Dennis</a>版权所有 © 2019',  // footer中显示的字, 可以嵌入html标签
 
-  debug: true,  // 是否开启debug模式, 不会请求后端接口, 使用mock的数据
+  debug: false,  // 是否开启debug模式, 不会请求后端接口, 使用mock的数据
 
   tabMode: {  // tab模式相关配置
     enable: false,  // 是否开启tab模式
