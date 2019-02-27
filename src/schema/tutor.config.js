@@ -1,6 +1,6 @@
 module.exports = {
-  showExport: false,
-  showImport: false,
+  showExport: true,
+  showImport: true,
   showInsert: true,
   showUpdate: true,
   showDelete: true,

@@ -8,9 +8,8 @@ def db_helper(jsonfy_rule):
         def inner(*args, **kwargs):
             with pymysql.connect(host=config.MYSQL_HOST, port=config.MYSQL_PORT,user=config.MYSQL_USRT, password=config.MYSQL_PASSWD, db=config.MYSQL_DB) as conn:
                 try:
-                    result = func(conn=conn, *args, **kwargs)
-                    total = len(result)
-                    response = __common_struct(jsonfy_rule(result), total)
+                    result, cnt = func(conn=conn, *args, **kwargs)
+                    response = __common_struct(jsonfy_rule(result), cnt)
                 except Exception as e:
                     response = __common_struct(None, None,False, str(e))
             return response
@@ -18,14 +17,14 @@ def db_helper(jsonfy_rule):
     return wrapper
 
 
-def __common_struct(data, total=None, success=True, error_msg='error'):
+def __common_struct(data, cnt,success=True, error_msg='error'):
     if success:
         result = {}
         result['data'] = data
         result['status'] = 1
         result['message'] = 'success'
         result['success'] = True
-        result['total'] = total
+        result['total'] = cnt
         return result
     else:
         result = {}
@@ -33,6 +32,6 @@ def __common_struct(data, total=None, success=True, error_msg='error'):
         result['status'] = 0
         result['message'] = error_msg
         result['success'] = False
-        result['total'] = total
+        result['total'] = cnt
         return result
     return result
