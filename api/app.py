@@ -1,6 +1,6 @@
 # coding=utf-8
 from flask import Flask
-from flask_restful import Resource, Api, reqparse
+from flask_restful import Resource, Api, reqparse, request
 from flask_cors import CORS
 import os
 
@@ -15,14 +15,16 @@ parser = reqparse.RequestParser()
 parser.add_argument('username', type=str, location='form')
 parser.add_argument('password', type=str, location='form')
 # 添加导师表相关信息
-parser.add_argument('tutor_name')
-parser.add_argument('tutor_phone')
-parser.add_argument('tutor_id')
+parser.add_argument('tutor_name', location='json')
+parser.add_argument('tutor_phone', location='json')
+parser.add_argument('tutor_id', location='json')
+parser.add_argument('id', location='json')
 
 # 表项目
-parser.add_argument('page')
-parser.add_argument('pageSize')
-parser.add_argument('keys')
+#parser.add_argument('keys', location='args')
+parser.add_argument('page', location='json')
+parser.add_argument('pageSize', location='json')
+
 
 class Login(Resource):
 	def post(self):
@@ -59,7 +61,7 @@ class SchemaTutor(Resource):
 class SelectTutor(Resource):
 	def post(self):
 		args = parser.parse_args()
-		return get_tutor(args['tutor_name'], args['tutor_phone'], args['page'], args['pageSize'])
+		return get_tutor(args['tutor_id'], args['tutor_name'], args['tutor_phone'], args['page'], args['pageSize'])
 
 class Add_tutor(Resource):
 	def post(self):
@@ -67,13 +69,8 @@ class Add_tutor(Resource):
 		return add_tutor(args['tutor_id'], args['tutor_name'], args['tutor_phone'])
 class Delete_tutor(Resource):
 	def get(self):
-		#get请求400问题
-		args = parser.parse_args()
-		print(args.get('keys'))
-		print(1122)
-		return delete_tutor(args['keys'])
-	def options(self):
-		pass
+		return delete_tutor(request.values['keys'])
+
 
 
 api.add_resource(Login, '/api/login')
@@ -81,7 +78,7 @@ api.add_resource(getCurrentUser, '/api/getCurrentUser')
 api.add_resource(SchemaTutor,'/api/tutor/schema')
 api.add_resource(SelectTutor,'/api/tutor/select')
 api.add_resource(Add_tutor,'/api/tutor/insert')
-api.add_resource(Delete_tutor, '/api/tutor/delete',)
+api.add_resource(Delete_tutor, '/api/tutor/delete')
 
 if __name__ == '__main__':
     app.run(debug=True)

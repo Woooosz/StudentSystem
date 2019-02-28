@@ -16,6 +16,18 @@ def db_helper(jsonfy_rule):
         return inner
     return wrapper
 
+def db_helper_no_json():
+    def wrapper(func):
+        def inner(*args, **kwargs):
+            with pymysql.connect(host=config.MYSQL_HOST, port=config.MYSQL_PORT,user=config.MYSQL_USRT, password=config.MYSQL_PASSWD, db=config.MYSQL_DB) as conn:
+                try:
+                    result, cnt = func(conn=conn, *args, **kwargs)
+                    response = __common_struct(result, cnt)
+                except Exception as e:
+                    response = __common_struct(None, None,False, str(e))
+            return response
+        return inner
+    return wrapper
 
 def __common_struct(data, cnt,success=True, error_msg='error'):
     if success:

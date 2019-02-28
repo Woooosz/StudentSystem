@@ -5,9 +5,8 @@
 module.exports = [
   {
     key:'tutor_id',
-    title:'编号',
+    title:'教师编号',
     dataType:'varchar',
-    primary:true
   },
   {
     key:'tutor_name',

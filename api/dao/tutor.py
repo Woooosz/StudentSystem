@@ -1,11 +1,11 @@
-from dao.decorator import db_helper
+from dao.decorator import db_helper, db_helper_no_json
 import pymysql
 import json
 
 def mapping(x):
     if x is None:
         return None
-    return {'tutor_id': x[0], 'tutor_name': x[1], 'tutor_phone': x[2]}
+    return {'id':x[0], 'tutor_id': x[1], 'tutor_name': x[2], 'tutor_phone': x[3]}
 
 def get_schema():
     result = {}
@@ -17,11 +17,12 @@ def get_schema():
     return result
 
 @db_helper(lambda x: [mapping(y) for y in x])
-def get_tutor(tutor_name, tutor_phone, page, pageSize, conn=None):
+def get_tutor(tutor_id, tutor_name, tutor_phone, page, pageSize, conn=None):
     cursor = conn
     tutor_name = '' if tutor_name is None else tutor_name
     tutor_phone = '' if tutor_phone is None else tutor_phone
-    sql_get = "SELECT * FROM tutor WHERE tutor_name like '%%%s%%' and tutor_phone like '%%%s%%' LIMIT  %d, %d" % (tutor_name, tutor_phone, (int(page) - 1) * int(pageSize), (int(page)) * int(pageSize))
+    tutor_id = '' if tutor_id is None else tutor_id
+    sql_get = "SELECT * FROM tutor WHERE tutor_id like '%%%s%%' and tutor_name like '%%%s%%' and tutor_phone like '%%%s%%' LIMIT  %d, %d" % (tutor_id, tutor_name, tutor_phone, (int(page) - 1) * int(pageSize), (int(page)) * int(pageSize))
     cursor.execute(sql_get)
     res = cursor.fetchall()
 
@@ -33,14 +34,21 @@ def get_tutor(tutor_name, tutor_phone, page, pageSize, conn=None):
 @db_helper(mapping)
 def add_tutor(tutor_id, tutor_name, tutor_phone, conn=None):
     cursor = conn
-    sql_insert = "INSERT INTO tutor VALUES ('%s','%s', '%s')" % (tutor_id, tutor_name, tutor_phone)
+    sql_insert = "INSERT INTO tutor VALUES (NULL, '%s','%s', '%s')" % (tutor_id, tutor_name, tutor_phone)
     cursor.execute(sql_insert)
-    return ((tutor_id, tutor_name, tutor_phone)), None
+    return ((cursor.lastrowid, tutor_id, tutor_name, tutor_phone)), None
 
-@db_helper(mapping)
+@db_helper_no_json()
 def delete_tutor(tutor_id, conn=None):
     cursor = conn
-    sql_delete = "DELETE FROM tutor WHERE tutor_id = '%s'" % (tutor_id)
-    cursor.execute(sql_delete)
-    data = cursor.fetchone()[0]
-    print(data)
+        # converted = "'"
+        # for s in tutor_id:
+        #     if s != ',':
+        #         converted += s
+        #     else:
+        #         converted += "','"
+        # converted += "'"
+    converted = tutor_id
+    sql_delete = "DELETE FROM tutor WHERE id IN (%s)" % (converted)
+    row = cursor.execute(sql_delete)
+    return row, None
