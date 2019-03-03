@@ -21,17 +21,18 @@ module.exports = [
     sorter: (a, b) => a.id - b.id,
   },
   {
-    key: 'peiyangfangshi',
-    title: '培养方式',
-    dataType: 'varchar',
-  },
-  {
     key:'xueweileixing',
     title:'学位类型',
     dataType:'varchar',
   },
   {
-    key:'xuehao',
+    key: 'peiyangfangshi',
+    title: '培养方式',
+    dataType: 'varchar',
+  },
+
+  {
+    key:'stuid',
     title:'学号',
     dataType:'varchar',
   },
@@ -134,7 +135,7 @@ module.exports = [
     validator: [{type: 'string', pattern: /^[a-zA-Z0-9]+$/, message: '只能是数字+字母'}],
   },
   {
-    key: 'mail',
+    key: 'email',
     title: '邮箱',
     dataType: 'varchar',
     validator: [{type: 'email', required: true, message: '邮箱地址有误'}],

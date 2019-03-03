@@ -5,7 +5,7 @@ import json
 def mapping(x):
     if x is None:
         return None
-    return {'id':x[0], 'tutor_id': x[1], 'tutor_name': x[2], 'tutor_phone': x[3]}
+    return {'workroom_id':x[0], 'roomname': x[1], 'capacity': x[2], 'support_name': x[3], 'work_organization':x[4], 'used':x[5], 'rate':x[6]}
 
 def get_schema():
     result = {}
@@ -22,14 +22,22 @@ def get_tutor(tutor_id, tutor_name, tutor_phone, page, pageSize, conn=None):
     tutor_name = '' if tutor_name is None else tutor_name
     tutor_phone = '' if tutor_phone is None else tutor_phone
     tutor_id = '' if tutor_id is None else tutor_id
-    sql_get = "SELECT * FROM tutor WHERE tutor_id like '%%%s%%' and tutor_name like '%%%s%%' and tutor_phone like '%%%s%%' LIMIT  %d, %d" % (tutor_id, tutor_name, tutor_phone, (int(page) - 1) * int(pageSize), (int(page)) * int(pageSize))
+    sql_get = "SELECT * FROM vw_workroom WHERE roomname like '%%%s%%' and support_name like '%%%s%%' and work_organization like '%%%s%%' LIMIT  %d, %d" % (tutor_id, tutor_name, tutor_phone, (int(page) - 1) * int(pageSize), (int(page)) * int(pageSize))
     cursor.execute(sql_get)
     res = cursor.fetchall()
+    res2 = []
+    for i in res:
+        # 这里有问题
+        print(i)
+        rate = str(round(100* (float(i[5]) / float(i[2])),2)) + '%'
+        ls = list(i)
+        ls.append(rate)
+        res2.append(ls)
 
-    sql_get = "SELECT COUNT(*)  AS cnt FROM tutor WHERE tutor_name like '%%%s%%' and tutor_phone like '%%%s%%' " % (tutor_name, tutor_phone)
+    sql_get = "SELECT COUNT(*)  AS cnt FROM vw_workroom WHERE support_name like '%%%s%%' and work_organization like '%%%s%%' " % (tutor_name, tutor_phone)
     cursor.execute(sql_get)
     cnt = cursor.fetchone()[0]
-    return res, cnt
+    return res2, cnt
 
 @db_helper(mapping)
 def add_tutor(tutor_id, tutor_name, tutor_phone, conn=None):

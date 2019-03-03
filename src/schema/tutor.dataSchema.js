@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {UpdateGPA1, UpdateGPA2} from '../components/UpdateComponentDemo';
 
 module.exports = [
   {
@@ -8,6 +7,7 @@ module.exports = [
     title:'编号',
     dataType:'int',
     primary:true,
+    showInTable: false,
   },
   {
     key: 'tutor_id',

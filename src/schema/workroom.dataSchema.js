@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {UpdateGPA1, UpdateGPA2} from '../components/UpdateComponentDemo';
 
 module.exports = [
   {
@@ -8,16 +7,17 @@ module.exports = [
     title: '编号',
     dataType: 'int',
     primary: true,
+    showInTable: true,
   },
   {
-    key:'name',
+    key:'roomname',
     title:'名称',
     dataType:'varchar',
   },
   {
     key:'capacity',
     title:'容量',
-    dataType:'int',
+    dataType:'varchar',
   },
   {
     key:'support_name',
@@ -25,13 +25,20 @@ module.exports = [
     dataType:'varchar',
   },
   {
-    key:'work_orgainzation',
+    key:'work_organization',
     title:'研究所',
-    dataType:'varchar'
+    dataType:'varchar',
   },
   {
-    key:'remain',
-    title:'剩余空位',
-    dataType:'int',
-  }
+    key:'used',
+    title:'当前使用',
+    dataType:'varchar',
+    disabled: true,
+  },
+  {
+    key:'rate',
+    title:'利用率',
+    dataType:'float',
+    disabled:true,
+  },
 ];

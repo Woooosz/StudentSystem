@@ -4,7 +4,7 @@
 
 module.exports = [
   {
-    key:'name',
+    key:'roomname',
     title:'教研室',
     dataType:'varchar',
   },

@@ -30,6 +30,7 @@ module.exports = [
     // 扩展接口, 决定了这一列渲染成什么样子
     render: (text, record) => text,
   },
+  
   {
     key: 'name',
     title: '用户名',
