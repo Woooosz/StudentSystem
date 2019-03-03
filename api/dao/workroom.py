@@ -28,7 +28,6 @@ def get_tutor(tutor_id, tutor_name, tutor_phone, page, pageSize, conn=None):
     res2 = []
     for i in res:
         # 这里有问题
-        print(i)
         rate = str(round(100* (float(i[5]) / float(i[2])),2)) + '%'
         ls = list(i)
         ls.append(rate)
@@ -40,34 +39,28 @@ def get_tutor(tutor_id, tutor_name, tutor_phone, page, pageSize, conn=None):
     return res2, cnt
 
 @db_helper(mapping)
-def add_tutor(tutor_id, tutor_name, tutor_phone, conn=None):
+def add_tutor(tutor_id, capacity,tutor_name, tutor_phone, conn=None):
     cursor = conn
-    sql_insert = "INSERT INTO tutor VALUES (NULL, '%s','%s', '%s')" % (tutor_id, tutor_name, tutor_phone)
+    sql_insert = "INSERT INTO workroom VALUES (NULL, '%s',%s,'%s','%s')" % (tutor_id, capacity,tutor_name, tutor_phone)
     cursor.execute(sql_insert)
-    return ((cursor.lastrowid, tutor_id, tutor_name, tutor_phone)), None
+    return ((cursor.lastrowid, tutor_id, capacity,tutor_name, tutor_phone, 0,'0.0%')), None
 
 @db_helper_no_json()
 def delete_tutor(tutor_id, conn=None):
     cursor = conn
-        # converted = "'"
-        # for s in tutor_id:
-        #     if s != ',':
-        #         converted += s
-        #     else:
-        #         converted += "','"
-        # converted += "'"
     converted = tutor_id
-    sql_delete = "DELETE FROM tutor WHERE id IN (%s)" % (converted)
+    sql_delete = "DELETE FROM workroom WHERE workroom_id IN (%s)" % (converted)
     row = cursor.execute(sql_delete)
     return row, None
 
 @db_helper_no_json()
-def update_tutor(id, tutor_id, tutor_name, tutor_phone, conn=None):
+def update_tutor(id, tutor_id, capacity, tutor_name, tutor_phone, conn=None):
     cursor = conn
-    sql_update = "UPDATE tutor SET tutor_id = IF(STRCMP('%s', 'None'), '%s',tutor_id), " \
-                 "tutor_name=IF(STRCMP('%s', 'None'), '%s',tutor_name), " \
-                 "tutor_phone=IF(STRCMP('%s', 'None'), '%s',tutor_phone) " \
-                 "WHERE id IN(%s)" % (tutor_id, tutor_id, tutor_name, tutor_name,tutor_phone, tutor_phone, id)
+    sql_update = "UPDATE workroom SET roomname = IF(STRCMP('%s', 'None'), '%s',roomname), " \
+                 "support_name =IF(STRCMP('%s', 'None'), '%s', support_name), " \
+                 "work_organization=IF(STRCMP('%s', 'None'), '%s', work_organization)," \
+                 "capacity = IF(STRCMP('%s', 'None'), %s, capacity)" \
+                 "WHERE workroom_id IN(%s)" % (tutor_id, tutor_id, tutor_name, tutor_name,tutor_phone, tutor_phone, capacity, capacity, id)
     # UPDATE
     # tutor
     # SET
@@ -75,6 +68,5 @@ def update_tutor(id, tutor_id, tutor_name, tutor_phone, conn=None):
     # WHERE
     # id
     # IN(3)
-    print(sql_update)
     row = cursor.execute(sql_update)
     return row, None

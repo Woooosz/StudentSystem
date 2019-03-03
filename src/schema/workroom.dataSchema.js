@@ -7,7 +7,7 @@ module.exports = [
     title: '编号',
     dataType: 'int',
     primary: true,
-    showInTable: true,
+    showInTable: false,
   },
   {
     key:'roomname',

@@ -101,7 +101,25 @@ class SelectWorkroom(Resource):
 		args = parser.parse_args()
 		return workroom.get_tutor(args['roomname'], args['support_name'], args['work_organization'], args['page'], args['pageSize'])
 
+class DeleteWorkroom(Resource):
+	def get(self):
+		return workroom.delete_tutor(request.values['keys'])
 
+class AddWorkroom(Resource):
+	def post(selfself):
+		args = parser.parse_args()
+		return workroom.add_tutor(args['roomname'], args['capacity'],args['support_name'], args['work_organization'])
+
+class UpdateWorkroom(Resource):
+	def post(self):
+		args = parser.parse_args()
+		return workroom.update_tutor(request.values['keys'], args['roomname'], args['capacity'], args['support_name'], args['work_organization'])
+
+# user表
+from dao import user
+class SchemaUser(Resource):
+	def get(self):
+		return user.get_schema()
 
 api.add_resource(Login, '/api/login')
 api.add_resource(getCurrentUser, '/api/getCurrentUser')
@@ -113,6 +131,9 @@ api.add_resource(Update_tutor, '/api/tutor/update')
 # workroom表
 api.add_resource(SchemaWorkroom,'/api/workroom/schema')
 api.add_resource(SelectWorkroom,'/api/workroom/select')
+api.add_resource(DeleteWorkroom,'/api/workroom/delete')
+api.add_resource(AddWorkroom, '/api/workroom/insert')
+api.add_resource(UpdateWorkroom,'/api/workroom/update')
 
 if __name__ == '__main__':
     app.run(debug=True)
