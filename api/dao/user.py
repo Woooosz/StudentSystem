@@ -14,6 +14,7 @@ def get_schema():
     result['message'] = 'success'
     result['success'] = True
     result['total'] = None
+
     return result
 
 @db_helper(lambda x: [mapping(y) for y in x])

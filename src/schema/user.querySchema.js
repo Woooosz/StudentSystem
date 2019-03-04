@@ -10,8 +10,13 @@ module.exports = [
   },
   {
     key: 'xingming',
-    title: '姓名',
+    title: '姓名(支持全拼)',
     dataType: 'varchar',
+  },
+  {
+    key:'nianji',
+    title:'年级',
+    dataType:'varchar',
   },
   {
     key: 'shoujihaoma',
@@ -24,50 +29,32 @@ module.exports = [
     dataType: 'varchar',
   },
   {
-    key: 'daoshixingming',
-    title: '工作室',
-    dataType: 'varchar',
-  },
-  {
     key:'xueweileixing',
     title:'学位类型',
     dataType:'varchar',
-    showType:'radio',
-    options:[{key:'shuoshi', value:'硕士'},{key:'boshi', value:'博士'}]
+    showType:'checkbox',
+    options:[{key:'硕士', value:'硕士'},{key:'博士', value:'博士'}]
   },
   {
-    key: 'isNative',
-    title: '是否住校',
-    dataType: 'varchar',
-    showType: 'radio',
-    options: [{key: 'yes', value: '是'}, {key: 'no', value: '否'}],
+    key:'peiyangfangshi',
+    title:'培养方式',
+    dataType:'varchar',
+    showType:'checkbox',
+    options:[{key:'学硕', value:'学硕'},{key:'专硕', value:'专硕'},{key:'MBA', value:'MBA'}]
   },
-  // 级联选择, 和select很类似
-  // 同样支持placeholder/defaultValue等属性
   {
-    key: 'location',
-    title: '地理位置',
-    dataType: 'varchar',  // 一般而言dataType是字符串, 但也可以是数字
-    showType: 'cascader',
-    defaultValue: ['zhejiang', 'hangzhou', 'xihu'],
-    options: [{
-      value: 'zhejiang',   // option的value必须是字符串, 和select类似
-      label: '浙江',
-      children: [{
-        value: 'hangzhou',
-        label: '杭州',
-        children: [{
-          value: 'xihu',
-          label: '西湖',
-        }],
-      }],
-    }, {
-      value: 'yuzhou',
-      label: '宇宙中心',
-      children: [{
-        value: 'wudaokou',
-        label: '五道口',
-      }],
-    }],
+    key:'zhengzhimianmao',
+    title:'政治面貌',
+    dataType:'varchar',
+    showType:'multiSelect',
+    options:[{key:'中共党员', value:'中共党员'}, {key:'中共预备党员', value:'中共预备党员'},{key:'共青团员', value:'共青团员'}, {key:'群众', value:'群众'},{key:'民主党派成员', value:'民主党派成员'}]
   },
+  {
+    key:'zhuanye',
+    title:'专业',
+    dataType:'varchar',
+    showType:'multiSelect',
+    options:[{key:'管理科学与工程', value:'管理科学与工程'}, {key:'经济系统分析与管理', value:'经济系统分析与管理'}, {key:'信息管理与电子政务', value:'信息管理与电子政务'}, {key:'交通系统工程', value:'交通系统工程'}, {key:'系统工程', value:'系统工程'}, {key:'信息管理与电子政务', value:'信息管理与电子政务'}, {key:'会计学', value:'会计学'}, {key:'企业管理', value:'企业管理'}, {key:'旅游管理', value:'旅游管理'}, {key:'技术经济及管理', value:'技术经济及管理'}, {key:'项目管理', value:'项目管理'}, {key:'环境管理', value:'环境管理'}, {key:'投资学', value:'投资学'}, {key:'知识产权管理', value:'知识产权管理'}, {key:'物流工程', value:'物流工程'}, {key:'金融学', value:'金融学'}, {key:'产业经济学', value:'产业经济学'}, {key:'国际贸易学', value:'国际贸易学'}, {key:'金融专硕', value:'金融专硕'}]
+  },
+  
 ];

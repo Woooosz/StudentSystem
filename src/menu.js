@@ -17,24 +17,24 @@ const sidebarMenu = [
     name: '学生信息',  // 在菜单中显示的名称
     icon: 'smile',  // 图标是可选的
     child: [
-      {
-        key: 'option1',
-        name: '用户',
-        icon: 'play-circle',   // 二级三级菜单也可以带图标
-      },
-      {
-        key: 'option2',
-        name: '图片DEMO',
-        icon: 'android',
-      },
-      {
-        key: 'option3',
-        name: '自定义操作',
-        icon: 'bulb',
-      },
+      // {
+      //   key: 'option1',
+      //   name: '用户',
+      //   icon: 'play-circle',   // 二级三级菜单也可以带图标
+      // },
+      // {
+      //   key: 'option2',
+      //   name: '图片DEMO',
+      //   icon: 'android',
+      // },
+      // {
+      //   key: 'option3',
+      //   name: '自定义操作',
+      //   icon: 'bulb',
+      // },
       {
         key: 'user',
-        name: '用户信息',
+        name: '学生信息',
         icon: 'bulb',
       },
       {
