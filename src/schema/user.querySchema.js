@@ -29,7 +29,7 @@ module.exports = [
     title:'学位类型',
     dataType:'varchar',
     showType:'radio',
-    options:[{key:'shuoshi', value:'硕士'},{key:'boshi', value:'博士'}]
+    options:[{key:'shuoshi', value:'硕士'},{key:'boshi', value:'博士'},{key:'MBA', value:'MBA'}]
   },
   {
     key: 'isNative',

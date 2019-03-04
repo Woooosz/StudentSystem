@@ -43,11 +43,12 @@ const routes = (
         </Route>
 
         <Route path="userMenu">
-          <Route path="modifyUser" component={Hello}/>
         </Route>
 
         <Route path="headerMenu4" component={Hello}/>
-        <Route path="alone" component={Hello}/>
+        <Route path="alone">
+           <Route path="logInfo" tableName="logInfo" getComponent={DBTableContainer}/>
+        </Route>
         <Route path="alone2" component={Hello}/>
 
         <Route path="*" component={Error}/>

@@ -53,6 +53,12 @@ const sidebarMenu = [
     key: 'alone',
     name: '权限管理',
     icon: 'clock-circle',
+    child:[
+      {
+        key:'logInfo',
+        name:'登录信息',
+      },
+    ],
   },
 ];
 
