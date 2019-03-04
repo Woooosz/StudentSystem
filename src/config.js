@@ -13,7 +13,7 @@ module.exports = {
   favicon: 'http://jxy.me/favicon.ico',  // 设置网页的favicon, 可以是外链, 也可以是本地
   footer: '<a target="_blank" href="http://goesbest.cn">Dennis</a>版权所有 © 2019',  // footer中显示的字, 可以嵌入html标签
 
-  debug: true,  // 是否开启debug模式, 不会请求后端接口, 使用mock的数据
+  debug: false,  // 是否开启debug模式, 不会请求后端接口, 使用mock的数据
 
   tabMode: {  // tab模式相关配置
     enable: false,  // 是否开启tab模式
@@ -68,8 +68,8 @@ module.exports = {
     pageSizeOptions: ['10', '20', '50', '100'], // 指定每页可以显示多少条
 
     default: {  // 针对每个表格的默认配置
-      showExport: true,  // 显示导出按钮, 默认true
-      showImport: true,  // 显示导入按钮, 默认true
+      showExport: false,  // 显示导出按钮, 默认true
+      showImport: false,  // 显示导入按钮, 默认true
       showInsert: true,  // 显示新增按钮, 默认true
       showUpdate: true,  // 显示修改按钮, 默认true
       showDelete: true,  // 显示删除按钮, 默认true

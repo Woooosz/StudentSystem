@@ -9,13 +9,13 @@ module.exports = [
     dataType: 'varchar',
   },
   {
-    key: 'shoujihaoma',
-    title: '手机号码',
+    key: 'xingming',
+    title: '姓名',
     dataType: 'varchar',
   },
   {
-    key: 'xingming',
-    title: '姓名',
+    key: 'shoujihaoma',
+    title: '手机号码',
     dataType: 'varchar',
   },
   {
@@ -23,13 +23,17 @@ module.exports = [
     title: '工作室',
     dataType: 'varchar',
   },
-
+  {
+    key: 'daoshixingming',
+    title: '工作室',
+    dataType: 'varchar',
+  },
   {
     key:'xueweileixing',
     title:'学位类型',
     dataType:'varchar',
     showType:'radio',
-    options:[{key:'shuoshi', value:'硕士'},{key:'boshi', value:'博士'},{key:'MBA', value:'MBA'}]
+    options:[{key:'shuoshi', value:'硕士'},{key:'boshi', value:'博士'}]
   },
   {
     key: 'isNative',
