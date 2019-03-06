@@ -55,14 +55,8 @@ module.exports = [
 
   },
   {
-    key:'daoshi',
-    title:'导师',
-    dataType:'varchar',
-
-  },
-  {
-    key:'daoshidianhua',
-    title:'导师电话',
+    key:'daoshibianhao',
+    title:'导师编号',
     dataType:'varchar',
 
   },
@@ -180,20 +174,5 @@ module.exports = [
     key:'gongweihao',
     title:'工作位',
     dataType:'varchar',
-
-  },
-  {
-    key:'suozaifuzeren',
-    title:'所在负责人',
-    dataType:'varchar',
-    disabled:true,
-    placeholder:'请在教研室信息表中维护'
-  },
-  {
-    key:'yanjiusuo',
-    title:'研究所',
-    dataType:'varchar',
-    disabled:true,
-    placeholder:'请在教研室信息表中维护'
   },
 ];

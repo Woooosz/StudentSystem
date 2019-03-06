@@ -37,11 +37,14 @@ const routes = (
           {/* <Route path="option1" tableName="test" getComponent={DBTableContainer}/>
           <Route path="option2" tableName="testSms" getComponent={DBTableContainer}/>
           <Route path="option3" tableName="testAction" getComponent={DBTableContainer}/> */}
-          <Route path="user" tableName="user" getComponent={DBTableContainer}/>
           <Route path="tutor" tableName="tutor" getComponent={DBTableContainer}/>
           <Route path="workroom" tableName="workroom" getComponent={DBTableContainer}/>
-        </Route>
+          <Route path="student" tableName="student" getComponent={DBTableContainer}/>
 
+        </Route>
+        <Route path='shujuhuizong'>
+          <Route path="user" tableName="user" getComponent={DBTableContainer}/>
+        </Route>
         <Route path="userMenu">
         </Route>
 

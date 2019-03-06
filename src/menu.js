@@ -14,7 +14,7 @@
 const sidebarMenu = [
   {
     key: 'index',  // route时url中的值
-    name: '学生信息',  // 在菜单中显示的名称
+    name: '信息维护',  // 在菜单中显示的名称
     icon: 'smile',  // 图标是可选的
     child: [
       // {
@@ -33,19 +33,30 @@ const sidebarMenu = [
       //   icon: 'bulb',
       // },
       {
-        key: 'user',
-        name: '学生信息',
-        icon: 'bulb',
-      },
-      {
         key:'tutor',
         name:'导师信息',
         icon:'bulb',
       },
       {
         key:'workroom',
-        name:'工位信息',
+        name:'教研室信息',
         icon:'bulb',
+      },
+      {
+        key:'student',
+        name:'学生信息',
+        icon:'bulb',
+      },
+    ],
+  },
+  {
+    key:'shujuhuizong',
+    name:'数据汇总',
+    child:[
+      {
+        key: 'user',
+        name: '学生信息汇总',
+        icon: 'bulb',
       },
     ],
   },

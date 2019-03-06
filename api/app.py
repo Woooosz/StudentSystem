@@ -34,6 +34,16 @@ parser.add_argument('work_organization', location='json')
 parser.add_argument('used', location='json')
 parser.add_argument('used_rate', location='json')
 
+# 添加 user 信息
+parser.add_argument('xuehao', location='json')
+parser.add_argument('xingming', location='json')
+parser.add_argument('nianji', location='json')
+parser.add_argument('shoujihaoma', location='json')
+parser.add_argument('gongzuoshi', location='json')
+parser.add_argument('xueweileixing', location='json')
+parser.add_argument('peiyangfangshi', location='json')
+parser.add_argument('zhengzhimianmao', location='json')
+parser.add_argument('zhuanye', location='json')
 class Login(Resource):
 	def post(self):
 		args = parser.parse_args()
@@ -121,6 +131,29 @@ class SchemaUser(Resource):
 	def get(self):
 		return user.get_schema()
 
+class SelectUser(Resource):
+	def list2str(self, a):
+		ans = ''
+		for i in a:
+			ans = ans + ',' + i
+		print(a[1:-1])
+		return a[1:-1]
+	def post(self):
+		args = parser.parse_args()
+		xuehao = '' if args['xuehao'] is None else args['xuehao']
+		xingming = '' if args['xingming'] is None else args['xingming']
+		nianji = '' if args['nianji'] is None else args['nianji']
+		shoujihaoma = '' if args['shoujihaoma'] is None else args['shoujihaoma']
+		gongzuoshi = 'select roomname from workroom group by roomname' if args['gongzuoshi'] is None else self.list2str(args['gongzuoshi'])
+		xueweileixing = 'select xueweileixing from student group by xueweileixing' if args['xueweileixing'] is None else self.list2str(args['xueweileixing'])
+		peiyangfangshi = 'select peiyangfangshi from student group by peiyangfangshi' if args['peiyangfangshi'] is None else self.list2str(args['peiyangfangshi'])
+		zhengzhimianmao = 'select zhengzhimianmao from student group by zhengzhimianmao' if args['zhengzhimianmao'] is None else self.list2str(args['zhengzhimianmao'])
+		zhuanye = 'select zhuanye from student group by zhuanye' if args['zhuanye'] is None else self.list2str(args['zhuanye'])
+		page = args['page']
+		pageSize = args['pageSize']
+		return user.get_tutor(xuehao, xingming, nianji, shoujihaoma, gongzuoshi, xueweileixing, peiyangfangshi, zhengzhimianmao, zhuanye, page, pageSize)
+
+
 api.add_resource(Login, '/api/login')
 api.add_resource(getCurrentUser, '/api/getCurrentUser')
 api.add_resource(SchemaTutor,'/api/tutor/schema')
@@ -134,6 +167,9 @@ api.add_resource(SelectWorkroom,'/api/workroom/select')
 api.add_resource(DeleteWorkroom,'/api/workroom/delete')
 api.add_resource(AddWorkroom, '/api/workroom/insert')
 api.add_resource(UpdateWorkroom,'/api/workroom/update')
+# user表
+api.add_resource(SchemaUser,'/api/user/schema')
+api.add_resource(SelectUser, '/api/user/select')
 
 if __name__ == '__main__':
     app.run(debug=True)

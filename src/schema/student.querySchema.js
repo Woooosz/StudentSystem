@@ -56,5 +56,4 @@ module.exports = [
     showType:'multiSelect',
     options:[{key:'管理科学与工程', value:'管理科学与工程'}, {key:'经济系统分析与管理', value:'经济系统分析与管理'}, {key:'信息管理与电子政务', value:'信息管理与电子政务'}, {key:'交通系统工程', value:'交通系统工程'}, {key:'系统工程', value:'系统工程'}, {key:'信息管理与电子政务', value:'信息管理与电子政务'}, {key:'会计学', value:'会计学'}, {key:'企业管理', value:'企业管理'}, {key:'旅游管理', value:'旅游管理'}, {key:'技术经济及管理', value:'技术经济及管理'}, {key:'项目管理', value:'项目管理'}, {key:'环境管理', value:'环境管理'}, {key:'投资学', value:'投资学'}, {key:'知识产权管理', value:'知识产权管理'}, {key:'物流工程', value:'物流工程'}, {key:'金融学', value:'金融学'}, {key:'产业经济学', value:'产业经济学'}, {key:'国际贸易学', value:'国际贸易学'}, {key:'金融专硕', value:'金融专硕'}]
   },
-  
 ];
