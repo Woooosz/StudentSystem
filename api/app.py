@@ -44,6 +44,23 @@ parser.add_argument('xueweileixing', location='json')
 parser.add_argument('peiyangfangshi', location='json')
 parser.add_argument('zhengzhimianmao', location='json')
 parser.add_argument('zhuanye', location='json')
+parser.add_argument('biyeyuanxiao', location='json')
+parser.add_argument('xingbie', location='json')
+parser.add_argument('jiatinglianxiren', location='json')
+parser.add_argument('sos_relation', location='json')
+parser.add_argument('jiatinglianxidianhua', location='json')
+parser.add_argument('jiatingzhuzhi', location='json')
+parser.add_argument('minzu', location='json')
+parser.add_argument('hunfou', location='json')
+parser.add_argument('chushengriqi', location='json')
+parser.add_argument('shenfenzhenghaoma', location='json')
+parser.add_argument('email', location='json')
+parser.add_argument('shifouzhuxiao', location='json')
+parser.add_argument('xiaowaizhuzhi', location='json')
+parser.add_argument('susheid', location='json')
+parser.add_argument('fangjianhao', location='json')
+parser.add_argument('gongweihao', location='json')
+parser.add_argument('daoshibianhao', location='json')
 class Login(Resource):
 	def post(self):
 		args = parser.parse_args()
@@ -159,6 +176,41 @@ class SchemaStudent(Resource):
 	def get(self):
 		return student.get_schema()
 
+class SelectStudent(Resource):
+	def list2str(self, a):
+		ans = ''
+		for i in a:
+			ans = ans + ',' + i
+		return a[1:-1]
+	def post(self):
+		args = parser.parse_args()
+		xuehao = '' if args['xuehao'] is None else args['xuehao']
+		xingming = '' if args['xingming'] is None else args['xingming']
+		nianji = '' if args['nianji'] is None else args['nianji']
+		shoujihaoma = '' if args['shoujihaoma'] is None else args['shoujihaoma']
+		gongzuoshi = 'select roomname from workroom group by roomname' if args['gongzuoshi'] is None else self.list2str(args['gongzuoshi'])
+		xueweileixing = 'select xueweileixing from student group by xueweileixing' if args['xueweileixing'] is None else self.list2str(args['xueweileixing'])
+		peiyangfangshi = 'select peiyangfangshi from student group by peiyangfangshi' if args['peiyangfangshi'] is None else self.list2str(args['peiyangfangshi'])
+		zhengzhimianmao = 'select zhengzhimianmao from student group by zhengzhimianmao' if args['zhengzhimianmao'] is None else self.list2str(args['zhengzhimianmao'])
+		zhuanye = 'select zhuanye from student group by zhuanye' if args['zhuanye'] is None else self.list2str(args['zhuanye'])
+		page = args['page']
+		pageSize = args['pageSize']
+		return student.get_tutor(xuehao, xingming, nianji, shoujihaoma, gongzuoshi, xueweileixing, peiyangfangshi, zhengzhimianmao, zhuanye, page, pageSize)
+
+class DeleteStudent(Resource):
+	def get(self):
+		return student.delete_tutor(request.values['keys'])
+
+class AddStudent(Resource):
+	def post(self):
+		args = parser.parse_args()
+		return student.add_tutor(args['xuehao'], args['xingming'],args['nianji'], args['shoujihaoma'],args['gongzuoshi'],args['xueweileixing']
+								  ,args['peiyangfangshi'],args['zhengzhimianmao'],args['zhuanye'],args['biyeyuanxiao'],args['xingbie'],args['jiatinglianxiren']
+								  ,args['sos_relation'], args['jiatinglianxidianhua'],args['jiatingzhuzhi'],args['minzu'],args['hunfou'],args['chushengriqi']
+								  , args['shenfenzhenghaoma'],args['email'],args['shifouzhuxiao'],args['xiaowaizhuzhi'],args['susheid'],args['fangjianhao'],args['gongweihao']
+								  , args['daoshibianhao']
+								  )
+
 api.add_resource(Login, '/api/login')
 api.add_resource(getCurrentUser, '/api/getCurrentUser')
 # tutor表
@@ -179,6 +231,10 @@ api.add_resource(SelectUser, '/api/user/select')
 
 # student信息维护表
 api.add_resource(SchemaStudent,'/api/student/schema')
+api.add_resource(SelectStudent,'/api/student/select')
+api.add_resource(DeleteStudent, '/api/student/delete')
+api.add_resource(AddStudent,'/api/student/insert')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
