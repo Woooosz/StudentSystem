@@ -125,7 +125,7 @@ class UpdateWorkroom(Resource):
 		args = parser.parse_args()
 		return workroom.update_tutor(request.values['keys'], args['roomname'], args['capacity'], args['support_name'], args['work_organization'])
 
-# user表
+# user汇总表
 from dao import user
 class SchemaUser(Resource):
 	def get(self):
@@ -153,9 +153,15 @@ class SelectUser(Resource):
 		pageSize = args['pageSize']
 		return user.get_tutor(xuehao, xingming, nianji, shoujihaoma, gongzuoshi, xueweileixing, peiyangfangshi, zhengzhimianmao, zhuanye, page, pageSize)
 
+# student维护表
+from dao import student
+class SchemaStudent(Resource):
+	def get(self):
+		return student.get_schema()
 
 api.add_resource(Login, '/api/login')
 api.add_resource(getCurrentUser, '/api/getCurrentUser')
+# tutor表
 api.add_resource(SchemaTutor,'/api/tutor/schema')
 api.add_resource(SelectTutor,'/api/tutor/select')
 api.add_resource(Add_tutor,'/api/tutor/insert')
@@ -170,6 +176,9 @@ api.add_resource(UpdateWorkroom,'/api/workroom/update')
 # user表
 api.add_resource(SchemaUser,'/api/user/schema')
 api.add_resource(SelectUser, '/api/user/select')
+
+# student信息维护表
+api.add_resource(SchemaStudent,'/api/student/schema')
 
 if __name__ == '__main__':
     app.run(debug=True)
