@@ -1,6 +1,7 @@
 # coding=utf-8
 from flask import Flask
 from flask_restful import Resource, Api, reqparse, request
+from werkzeug.datastructures import FileStorage
 from flask_cors import CORS
 import os
 
@@ -61,6 +62,8 @@ parser.add_argument('susheid', location='json')
 parser.add_argument('fangjianhao', location='json')
 parser.add_argument('gongweihao', location='json')
 parser.add_argument('daoshibianhao', location='json')
+
+parser.add_argument('file', type=FileStorage, location='files')
 class Login(Resource):
 	def post(self):
 		args = parser.parse_args()
@@ -116,6 +119,19 @@ class Update_tutor(Resource):
 		# 		args[k] = 'NULL'
 		# 		print(str(k) + '  ' + str(v))
 		return tutor.update_tutor(request.values['keys'], args['tutor_id'], args['tutor_name'], args['tutor_phone'])
+
+class Upload_tutor(Resource):
+	def post(self):
+		args = parser.parse_args()
+		f = args['file']
+		return tutor.upload(f)
+
+class Download_tutor(Resource):
+	def get(self):
+		print(request.values['q'])
+
+			
+		
 
 # workroom表
 from dao import workroom
@@ -222,6 +238,8 @@ api.add_resource(SelectTutor,'/api/tutor/select')
 api.add_resource(Add_tutor,'/api/tutor/insert')
 api.add_resource(Delete_tutor, '/api/tutor/delete')
 api.add_resource(Update_tutor, '/api/tutor/update')
+api.add_resource(Upload_tutor, '/api/tutor/import')
+api.add_resource(Download_tutor, '/api/tutor/export')
 # workroom表
 api.add_resource(SchemaWorkroom,'/api/workroom/schema')
 api.add_resource(SelectWorkroom,'/api/workroom/select')

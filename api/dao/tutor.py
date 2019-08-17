@@ -1,3 +1,4 @@
+#encoding=utf8
 from dao.decorator import db_helper, db_helper_no_json
 import pymysql
 import json
@@ -70,3 +71,33 @@ def update_tutor(id, tutor_id, tutor_name, tutor_phone, conn=None):
     print(sql_update)
     row = cursor.execute(sql_update)
     return row, None
+
+def upload(f):
+    successCnt = 0
+    errorCnt = 0
+    index = 0
+    errorlist = []
+    try:
+        for line in f:
+            s = str(line, encoding = "utf-8")
+            lis = s.strip('\r\n').split(',')
+            try:
+                add_tutor(lis[0], lis[1], lis[2])
+                successCnt = successCnt + 1
+            except:
+                if len(errorlist) == 0:
+                    errorlist.append(str(cnt + 1))
+                else:
+                    errorlist.append(','+str(cnt + 1))
+                errorCnt += 1
+            index = index + 1
+        if errorCnt == 0:
+            res = {"data":"导入成功{0}条。".format(successCnt), "message":"","success":True,"total":0}
+        else:
+            res = {"data":"导入成功{0}条，导入失败{1}条，导入失败的行：{2}".format(successCnt, errorCnt, ''.join(errorlist)), "message":"","success":True,"total":0}
+    except:
+        res = {"data":"导入失败，请重试。", "message":"","success":False,"total":0}
+    return res
+
+def download(q):
+    return 'success'
