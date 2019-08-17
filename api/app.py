@@ -161,11 +161,11 @@ class SelectUser(Resource):
 		xingming = '' if args['xingming'] is None else args['xingming']
 		nianji = '' if args['nianji'] is None else args['nianji']
 		shoujihaoma = '' if args['shoujihaoma'] is None else args['shoujihaoma']
-		gongzuoshi = 'select roomname from workroom group by roomname' if args['gongzuoshi'] is None else self.list2str(args['gongzuoshi'])
-		xueweileixing = 'select xueweileixing from student group by xueweileixing' if args['xueweileixing'] is None else self.list2str(args['xueweileixing'])
-		peiyangfangshi = 'select peiyangfangshi from student group by peiyangfangshi' if args['peiyangfangshi'] is None else self.list2str(args['peiyangfangshi'])
-		zhengzhimianmao = 'select zhengzhimianmao from student group by zhengzhimianmao' if args['zhengzhimianmao'] is None else self.list2str(args['zhengzhimianmao'])
-		zhuanye = 'select zhuanye from student group by zhuanye' if args['zhuanye'] is None else self.list2str(args['zhuanye'])
+		gongzuoshi = 'select roomname from workroom group by roomname' if args['gongzuoshi'] is None or len(args['gongzuoshi']) == 2 else self.list2str(args['gongzuoshi'])
+		xueweileixing = 'select xueweileixing from student group by xueweileixing' if args['xueweileixing'] is None or len(args['xueweileixing']) == 2 else self.list2str(args['xueweileixing'])
+		peiyangfangshi = 'select peiyangfangshi from student group by peiyangfangshi' if args['peiyangfangshi'] is None or len(args['peiyangfangshi']) == 2 else self.list2str(args['peiyangfangshi'])
+		zhengzhimianmao = 'select zhengzhimianmao from student group by zhengzhimianmao' if args['zhengzhimianmao'] is None or len(args['zhengzhimianmao']) == 2 else self.list2str(args['zhengzhimianmao'])
+		zhuanye = 'select zhuanye from student group by zhuanye' if args['zhuanye'] is None  or len(args['zhuanye']) == 2 else self.list2str(args['zhuanye'])
 		page = args['page']
 		pageSize = args['pageSize']
 		return user.get_tutor(xuehao, xingming, nianji, shoujihaoma, gongzuoshi, xueweileixing, peiyangfangshi, zhengzhimianmao, zhuanye, page, pageSize)
@@ -188,11 +188,11 @@ class SelectStudent(Resource):
 		xingming = '' if args['xingming'] is None else args['xingming']
 		nianji = '' if args['nianji'] is None else args['nianji']
 		shoujihaoma = '' if args['shoujihaoma'] is None else args['shoujihaoma']
-		gongzuoshi = 'select roomname from workroom group by roomname' if args['gongzuoshi'] is None else self.list2str(args['gongzuoshi'])
-		xueweileixing = 'select xueweileixing from student group by xueweileixing' if args['xueweileixing'] is None else self.list2str(args['xueweileixing'])
-		peiyangfangshi = 'select peiyangfangshi from student group by peiyangfangshi' if args['peiyangfangshi'] is None else self.list2str(args['peiyangfangshi'])
-		zhengzhimianmao = 'select zhengzhimianmao from student group by zhengzhimianmao' if args['zhengzhimianmao'] is None else self.list2str(args['zhengzhimianmao'])
-		zhuanye = 'select zhuanye from student group by zhuanye' if args['zhuanye'] is None else self.list2str(args['zhuanye'])
+		gongzuoshi = 'select roomname from workroom group by roomname' if args['gongzuoshi'] is None or len(args['gongzuoshi']) == 2 else self.list2str(args['gongzuoshi'])
+		xueweileixing = 'select xueweileixing from student group by xueweileixing' if args['xueweileixing'] is None or len(args['xueweileixing']) == 2 else self.list2str(args['xueweileixing'])
+		peiyangfangshi = 'select peiyangfangshi from student group by peiyangfangshi' if args['peiyangfangshi'] is None or len(args['peiyangfangshi']) == 2 else self.list2str(args['peiyangfangshi'])
+		zhengzhimianmao = 'select zhengzhimianmao from student group by zhengzhimianmao' if args['zhengzhimianmao'] is None or len(args['zhengzhimianmao']) == 2 else self.list2str(args['zhengzhimianmao'])
+		zhuanye = 'select zhuanye from student group by zhuanye' if args['zhuanye'] is None  or len(args['zhuanye']) == 2 else self.list2str(args['zhuanye'])
 		page = args['page']
 		pageSize = args['pageSize']
 		return student.get_tutor(xuehao, xingming, nianji, shoujihaoma, gongzuoshi, xueweileixing, peiyangfangshi, zhengzhimianmao, zhuanye, page, pageSize)
@@ -210,7 +210,10 @@ class AddStudent(Resource):
 								  , args['shenfenzhenghaoma'],args['email'],args['shifouzhuxiao'],args['xiaowaizhuzhi'],args['susheid'],args['fangjianhao'],args['gongweihao']
 								  , args['daoshibianhao']
 								  )
-
+from dao import echart
+class Echart(Resource):
+	def get(self):
+		return echart.getechart()
 api.add_resource(Login, '/api/login')
 api.add_resource(getCurrentUser, '/api/getCurrentUser')
 # tutor表
@@ -234,6 +237,10 @@ api.add_resource(SchemaStudent,'/api/student/schema')
 api.add_resource(SelectStudent,'/api/student/select')
 api.add_resource(DeleteStudent, '/api/student/delete')
 api.add_resource(AddStudent,'/api/student/insert')
+
+
+# echarts表
+api.add_resource(Echart, '/api/echarts')
 
 
 if __name__ == '__main__':

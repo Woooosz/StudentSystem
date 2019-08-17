@@ -25,7 +25,6 @@ def get_tutor(xuehao, xingming, nianji, shoujihaoma, gongzuoshi, xueweileixing, 
     print(sql_get)
     cursor.execute(sql_get)
     res = cursor.fetchall()
-
     sql_get = "SELECT count(*) FROM vw_user where stuid like '%%%s%%' and xingming like '%%%s%%' and nianji like '%%%s%%' and shoujihaoma like '%%%s%%' and roomname in (%s) and xueweileixing in (%s) and peiyangfangshi in (%s) and zhengzhimianmao in (%s) and zhuanye in (%s)" \
      % (xuehao, xingming, nianji, shoujihaoma, gongzuoshi, xueweileixing, peiyangfangshi, zhengzhimianmao, zhuanye)
     cursor.execute(sql_get)

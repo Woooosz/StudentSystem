@@ -98,6 +98,10 @@ class Ajax {
     return this.post(`${globalConfig.getAPIPath()}${globalConfig.login.validate}`, {username, password}, {headers});
   }
 
+  getechart() {
+    return this.get(`${globalConfig.getAPIPath()}/echarts`);
+  }
+
   /**
    *  封装CRUD相关操作
    *
